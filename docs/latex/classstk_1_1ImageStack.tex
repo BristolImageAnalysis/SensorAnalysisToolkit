@@ -1,0 +1,84 @@
+\hypertarget{classstk_1_1ImageStack}{
+\section{stk::ImageStack$<$ T\_\-PixelType $>$ Class Template Reference}
+\label{classstk_1_1ImageStack}\index{stk::ImageStack@{stk::ImageStack}}
+}
+
+
+Holds a collection of images that are accessed though std::vector iterators.  
+
+
+{\ttfamily \#include $<$stkImageStack.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstk_1_1ImageStack_a423e47e3f85dced370a6a688dd357f22}{ImageStack} ()
+\item 
+virtual \hyperlink{classstk_1_1ImageStack_a9dbdbbd1b1ca0322c07bcfcf906933e5}{$\sim$ImageStack} ()
+\item 
+void \hyperlink{classstk_1_1ImageStack_a67adffe6f651996e3c025fa0d89fc14c}{Initialise} (std::shared\_\-ptr$<$ std::vector$<$ T\_\-PixelType $>$ $>$ buffer, const int \&numberOfFrames, const int \&col, const int \&row)
+\item 
+std::vector$<$ T\_\-PixelType $>$::iterator \hyperlink{classstk_1_1ImageStack_af971ec074b7d371d9e44672f5cc6626c}{StartOfFrame} (const int \&frameNumber)
+\item 
+int \hyperlink{classstk_1_1ImageStack_af3e54a635f493de7f33e492ccb74372c}{NumberOfImageInStack} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\_\-PixelType$>$ class stk::ImageStack$<$ T\_\-PixelType $>$}
+
+Holds a collection of images that are accessed though std::vector iterators. Essentially a wrapper around std::vector providing methods for iterator calculations to obtain the pixel data. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstk_1_1ImageStack_a423e47e3f85dced370a6a688dd357f22}{
+\index{stk::ImageStack@{stk::ImageStack}!ImageStack@{ImageStack}}
+\index{ImageStack@{ImageStack}!stk::ImageStack@{stk::ImageStack}}
+\subsubsection[{ImageStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-PixelType $>$ {\bf stk::ImageStack}$<$ T\_\-PixelType $>$::{\bf ImageStack} ()}}
+\label{classstk_1_1ImageStack_a423e47e3f85dced370a6a688dd357f22}
+Default constructor -\/ initialises member variables to defaults \hypertarget{classstk_1_1ImageStack_a9dbdbbd1b1ca0322c07bcfcf906933e5}{
+\index{stk::ImageStack@{stk::ImageStack}!$\sim$ImageStack@{$\sim$ImageStack}}
+\index{$\sim$ImageStack@{$\sim$ImageStack}!stk::ImageStack@{stk::ImageStack}}
+\subsubsection[{$\sim$ImageStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-PixelType $>$ virtual {\bf stk::ImageStack}$<$ T\_\-PixelType $>$::$\sim${\bf ImageStack} ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classstk_1_1ImageStack_a9dbdbbd1b1ca0322c07bcfcf906933e5}
+Default destructor -\/ resets the shared pointer to image stack so that memory can be deallocated 
+
+\subsection{Member Function Documentation}
+\hypertarget{classstk_1_1ImageStack_a67adffe6f651996e3c025fa0d89fc14c}{
+\index{stk::ImageStack@{stk::ImageStack}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!stk::ImageStack@{stk::ImageStack}}
+\subsubsection[{Initialise}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-PixelType $>$ void {\bf stk::ImageStack}$<$ T\_\-PixelType $>$::Initialise (std::shared\_\-ptr$<$ std::vector$<$ T\_\-PixelType $>$ $>$ {\em buffer}, \/  const int \& {\em numberOfFrames}, \/  const int \& {\em col}, \/  const int \& {\em row})}}
+\label{classstk_1_1ImageStack_a67adffe6f651996e3c025fa0d89fc14c}
+Intialises the \hyperlink{classstk_1_1Image}{Image} stack so that image stack has ownership of the memory \begin{DoxyParagraph}{\mbox{[}in\mbox{]} buffer The buffer that has the pixel data.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} numberOfFrames The number of frames loaded.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} col Number of columns in the sensor.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} row Number of rows in the sensor.}
+
+\end{DoxyParagraph}
+\hypertarget{classstk_1_1ImageStack_af3e54a635f493de7f33e492ccb74372c}{
+\index{stk::ImageStack@{stk::ImageStack}!NumberOfImageInStack@{NumberOfImageInStack}}
+\index{NumberOfImageInStack@{NumberOfImageInStack}!stk::ImageStack@{stk::ImageStack}}
+\subsubsection[{NumberOfImageInStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-PixelType $>$ int {\bf stk::ImageStack}$<$ T\_\-PixelType $>$::NumberOfImageInStack ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1ImageStack_af3e54a635f493de7f33e492ccb74372c}
+Tells the user how many frames are in the stack. \begin{DoxyReturn}{Returns}
+The number of frames in the stack. 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1ImageStack_af971ec074b7d371d9e44672f5cc6626c}{
+\index{stk::ImageStack@{stk::ImageStack}!StartOfFrame@{StartOfFrame}}
+\index{StartOfFrame@{StartOfFrame}!stk::ImageStack@{stk::ImageStack}}
+\subsubsection[{StartOfFrame}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-PixelType $>$ std::vector$<$T\_\-PixelType$>$::iterator {\bf stk::ImageStack}$<$ T\_\-PixelType $>$::StartOfFrame (const int \& {\em frameNumber})}}
+\label{classstk_1_1ImageStack_af971ec074b7d371d9e44672f5cc6626c}
+Gives the iterator to the start of the frame for a given frame number \begin{DoxyParagraph}{\mbox{[}in\mbox{]} frameNumber The frame number that the user wants the iterator to point too.}
+
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+An iterator to the start of the image that has been requested. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/panfs/panasas01/phys/phrfp/SensorAnalysisToolKit/modules/Base/ImageStack/include/stkImageStack.h\end{DoxyCompactItemize}

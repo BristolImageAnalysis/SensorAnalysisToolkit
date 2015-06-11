@@ -1,0 +1,115 @@
+\hypertarget{classstk_1_1IOImageStack}{
+\section{stk::IOImageStack$<$ T\_\-datatype $>$ Class Template Reference}
+\label{classstk_1_1IOImageStack}\index{stk::IOImageStack@{stk::IOImageStack}}
+}
+
+
+\hyperlink{classstk_1_1IO}{IO} class to read multiple 2-\/d RAW images into memeory.  
+
+
+{\ttfamily \#include $<$stkRawImageStackIO.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstk_1_1IOImageStack_a6ffc3e1c1954bf3b09f42ced9f645743}{IOImageStack} ()
+\item 
+virtual \hyperlink{classstk_1_1IOImageStack_a802c8497a1ae2c74db74ccfacae8f128}{$\sim$IOImageStack} ()
+\item 
+std::shared\_\-ptr$<$ std::vector$<$ T\_\-datatype $>$ $>$ \hyperlink{classstk_1_1IOImageStack_ac66b6ab5e4b061fc6fbed2b98101a0bf}{ReadImageStack} (const std::string \&filePath, const std::string \&fileNameAndFormat, const int \&startingFrame, const int \&numOfReqImages, const int \&frameSize)
+\item 
+int \hyperlink{classstk_1_1IOImageStack_a8b107d1256c2d6c1b77297353c753ae9}{NumberOfLoadedFrames} ()
+\item 
+unsigned int \hyperlink{classstk_1_1IOImageStack_a17b0b767f58fab89564a20e9be012bf3}{MaximumBufferSize} ()
+\item 
+int \hyperlink{classstk_1_1IOImageStack_a25fbe1abf7b60046745581d1e657bb42}{NumberOfBytesLoaded} ()
+\item 
+bool \hyperlink{classstk_1_1IOImageStack_a2f6573c51109b983731eb78c5190ed6d}{FramesLoaded} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstk_1_1IOImageStack_a6371de9675dcc773d09e1e36f1050969}{
+void {\bfseries CheckAndAllocateMemory} (std::shared\_\-ptr$<$ std::vector$<$ T\_\-datatype $>$ $>$ frameMemory)}
+\label{classstk_1_1IOImageStack_a6371de9675dcc773d09e1e36f1050969}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\_\-datatype$>$ class stk::IOImageStack$<$ T\_\-datatype $>$}
+
+\hyperlink{classstk_1_1IO}{IO} class to read multiple 2-\/d RAW images into memeory. Class designed to take a set of files and load the contents into memory. There is no account for headers or any other offset that might be the RAW file. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstk_1_1IOImageStack_a6ffc3e1c1954bf3b09f42ced9f645743}{
+\index{stk::IOImageStack@{stk::IOImageStack}!IOImageStack@{IOImageStack}}
+\index{IOImageStack@{IOImageStack}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{IOImageStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::{\bf IOImageStack} ()}}
+\label{classstk_1_1IOImageStack_a6ffc3e1c1954bf3b09f42ced9f645743}
+Default constructor -\/ initialises some of the member functions to defult values \hypertarget{classstk_1_1IOImageStack_a802c8497a1ae2c74db74ccfacae8f128}{
+\index{stk::IOImageStack@{stk::IOImageStack}!$\sim$IOImageStack@{$\sim$IOImageStack}}
+\index{$\sim$IOImageStack@{$\sim$IOImageStack}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{$\sim$IOImageStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ virtual {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::$\sim${\bf IOImageStack} ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classstk_1_1IOImageStack_a802c8497a1ae2c74db74ccfacae8f128}
+Defualt destructor -\/ no memory allocated in the class so default behaviour 
+
+\subsection{Member Function Documentation}
+\hypertarget{classstk_1_1IOImageStack_a2f6573c51109b983731eb78c5190ed6d}{
+\index{stk::IOImageStack@{stk::IOImageStack}!FramesLoaded@{FramesLoaded}}
+\index{FramesLoaded@{FramesLoaded}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{FramesLoaded}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ bool {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::FramesLoaded ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IOImageStack_a2f6573c51109b983731eb78c5190ed6d}
+Whether or not the reading of the frames was successful. \begin{DoxyReturn}{Returns}
+Flag to indicate if the frames were loaded: true if yes false otherwise. 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1IOImageStack_a17b0b767f58fab89564a20e9be012bf3}{
+\index{stk::IOImageStack@{stk::IOImageStack}!MaximumBufferSize@{MaximumBufferSize}}
+\index{MaximumBufferSize@{MaximumBufferSize}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{MaximumBufferSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ unsigned int {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::MaximumBufferSize ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IOImageStack_a17b0b767f58fab89564a20e9be012bf3}
+The maximum buffer size in pixel elements. Calculated from member function max\_\-size(). \begin{DoxyReturn}{Returns}
+The maximum number of elements the buffer can hold as an unsigned int 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1IOImageStack_a25fbe1abf7b60046745581d1e657bb42}{
+\index{stk::IOImageStack@{stk::IOImageStack}!NumberOfBytesLoaded@{NumberOfBytesLoaded}}
+\index{NumberOfBytesLoaded@{NumberOfBytesLoaded}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{NumberOfBytesLoaded}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ int {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::NumberOfBytesLoaded ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IOImageStack_a25fbe1abf7b60046745581d1e657bb42}
+The number of bytes that have been loaded into memory. \begin{DoxyReturn}{Returns}
+The number of bytes loaded as an int 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1IOImageStack_a8b107d1256c2d6c1b77297353c753ae9}{
+\index{stk::IOImageStack@{stk::IOImageStack}!NumberOfLoadedFrames@{NumberOfLoadedFrames}}
+\index{NumberOfLoadedFrames@{NumberOfLoadedFrames}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{NumberOfLoadedFrames}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ int {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::NumberOfLoadedFrames ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IOImageStack_a8b107d1256c2d6c1b77297353c753ae9}
+Number of Frames that have been loaded. This will return the same as requested if the load is successful and if the number requested does not exceed the containers capability. \begin{DoxyReturn}{Returns}
+The number of frames as an int 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1IOImageStack_ac66b6ab5e4b061fc6fbed2b98101a0bf}{
+\index{stk::IOImageStack@{stk::IOImageStack}!ReadImageStack@{ReadImageStack}}
+\index{ReadImageStack@{ReadImageStack}!stk::IOImageStack@{stk::IOImageStack}}
+\subsubsection[{ReadImageStack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ std::shared\_\-ptr$<$ std::vector$<$T\_\-datatype$>$ $>$ {\bf stk::IOImageStack}$<$ T\_\-datatype $>$::ReadImageStack (const std::string \& {\em filePath}, \/  const std::string \& {\em fileNameAndFormat}, \/  const int \& {\em startingFrame}, \/  const int \& {\em numOfReqImages}, \/  const int \& {\em frameSize})}}
+\label{classstk_1_1IOImageStack_ac66b6ab5e4b061fc6fbed2b98101a0bf}
+Read image stack loops over a set of files and loads them into memory. This is returned to user in the form of a smart pointer to a vector. In order to allocate memory correctly the user has to give the frame size i.e for 2x2 image the framesize would be 4. If the user requests a number of frames greater than the max size of the vector the number of frames to load is recalculated to take the maximum the vector can hold. \begin{DoxyParagraph}{\mbox{[}in\mbox{]} filePath Full path to the images i.e /$<$home$>$/$<$experiment$>$/}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} fileNameAndFormat File name including formatting characters. For instance testimage000i.raw.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} startingFrame Starting frame number.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} numOfReqImages Number of images that are to be loaded.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{\mbox{[}in\mbox{]} frameSize Size of the image frame that is to be loaded into memory}
+
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+Shared pointer to a vector holding all the images in memory 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/panfs/panasas01/phys/phrfp/SensorAnalysisToolKit/modules/IO/RawIOImageStack/include/stkRawImageStackIO.h\end{DoxyCompactItemize}

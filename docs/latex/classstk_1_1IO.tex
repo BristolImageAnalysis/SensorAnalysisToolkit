@@ -1,0 +1,76 @@
+\hypertarget{classstk_1_1IO}{
+\section{stk::IO$<$ T\_\-datatype $>$ Class Template Reference}
+\label{classstk_1_1IO}\index{stk::IO@{stk::IO}}
+}
+
+
+Imports Raw data from a binary file with no header into into a vector of datatype of the pixel.  
+
+
+{\ttfamily \#include $<$stkRawImageIO.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstk_1_1IO_a7bf75895372d604dd9251792cd3dc74f}{IO} ()
+\item 
+virtual \hyperlink{classstk_1_1IO_a8dad66d04b2367632b64c7f030e5ec2f}{$\sim$IO} ()
+\item 
+void \hyperlink{classstk_1_1IO_a6318b4ae3772f8c8e38d094eceebe630}{WriteImage} (T\_\-datatype $\ast$anImage, std::string filename)
+\item 
+std::shared\_\-ptr$<$ std::vector$<$ T\_\-datatype $>$ $>$ \hyperlink{classstk_1_1IO_a5cc5f494be8ac294efb38b96e4fc3742}{ReadImage} (const std::string \&fullFileName)
+\item 
+const int \hyperlink{classstk_1_1IO_a8bd433a5700222e3e8505984f572d124}{BytesRead} ()
+\item 
+const bool \hyperlink{classstk_1_1IO_aa99e99b11bfad3119268ea65d593d032}{ImageLoaded} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\_\-datatype$>$ class stk::IO$<$ T\_\-datatype $>$}
+
+Imports Raw data from a binary file with no header into into a vector of datatype of the pixel. Class to read and write raw pixel data into memory and out of memory. Works for single image files that contain the contents of a single frame of a camera with no header information. Holds only information about the loading process. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstk_1_1IO_a7bf75895372d604dd9251792cd3dc74f}{
+\index{stk::IO@{stk::IO}!IO@{IO}}
+\index{IO@{IO}!stk::IO@{stk::IO}}
+\subsubsection[{IO}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ {\bf stk::IO}$<$ T\_\-datatype $>$::{\bf IO} ()}}
+\label{classstk_1_1IO_a7bf75895372d604dd9251792cd3dc74f}
+Default constructor -\/ intialises the bytes loaded to 0 and loaded flag to false \hypertarget{classstk_1_1IO_a8dad66d04b2367632b64c7f030e5ec2f}{
+\index{stk::IO@{stk::IO}!$\sim$IO@{$\sim$IO}}
+\index{$\sim$IO@{$\sim$IO}!stk::IO@{stk::IO}}
+\subsubsection[{$\sim$IO}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ virtual {\bf stk::IO}$<$ T\_\-datatype $>$::$\sim${\bf IO} ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classstk_1_1IO_a8dad66d04b2367632b64c7f030e5ec2f}
+Default destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classstk_1_1IO_a8bd433a5700222e3e8505984f572d124}{
+\index{stk::IO@{stk::IO}!BytesRead@{BytesRead}}
+\index{BytesRead@{BytesRead}!stk::IO@{stk::IO}}
+\subsubsection[{BytesRead}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ const int {\bf stk::IO}$<$ T\_\-datatype $>$::BytesRead ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IO_a8bd433a5700222e3e8505984f572d124}
+The number of bytes of the file read into the buffer. This is 0 if the attempt fails. \hypertarget{classstk_1_1IO_aa99e99b11bfad3119268ea65d593d032}{
+\index{stk::IO@{stk::IO}!ImageLoaded@{ImageLoaded}}
+\index{ImageLoaded@{ImageLoaded}!stk::IO@{stk::IO}}
+\subsubsection[{ImageLoaded}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ const bool {\bf stk::IO}$<$ T\_\-datatype $>$::ImageLoaded ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstk_1_1IO_aa99e99b11bfad3119268ea65d593d032}
+Reports the status of the image loaded flag. True if last load was successful else false. \hypertarget{classstk_1_1IO_a5cc5f494be8ac294efb38b96e4fc3742}{
+\index{stk::IO@{stk::IO}!ReadImage@{ReadImage}}
+\index{ReadImage@{ReadImage}!stk::IO@{stk::IO}}
+\subsubsection[{ReadImage}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ std::shared\_\-ptr$<$ std::vector$<$T\_\-datatype$>$ $>$ {\bf stk::IO}$<$ T\_\-datatype $>$::ReadImage (const std::string \& {\em fullFileName})}}
+\label{classstk_1_1IO_a5cc5f494be8ac294efb38b96e4fc3742}
+The ReadImage method takes the full name of an image to be loaded into memory. This is returned as a shared pointer to a vector where the pixel data is stored. If the load fails the vector returned is empty. If this fails the loaded flag is set to false else if will be set to true. 
+\begin{DoxyParams}{Parameters}
+\item[\mbox{$\leftarrow$} {\em fullFileName}]Full path and file name of image. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the image with the pixels data held in a vector. 
+\end{DoxyReturn}
+\hypertarget{classstk_1_1IO_a6318b4ae3772f8c8e38d094eceebe630}{
+\index{stk::IO@{stk::IO}!WriteImage@{WriteImage}}
+\index{WriteImage@{WriteImage}!stk::IO@{stk::IO}}
+\subsubsection[{WriteImage}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\_\-datatype $>$ void {\bf stk::IO}$<$ T\_\-datatype $>$::WriteImage (T\_\-datatype $\ast$ {\em anImage}, \/  std::string {\em filename})}}
+\label{classstk_1_1IO_a6318b4ae3772f8c8e38d094eceebe630}
+Old write function this will be replaced to take new image as defined by the returned data structure of ReadImage. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/panfs/panasas01/phys/phrfp/SensorAnalysisToolKit/modules/IO/RawIO/include/stkRawImageIO.h\end{DoxyCompactItemize}
