@@ -31,29 +31,29 @@ TEST( ImageSum, CheckAdditionOfArray_STL ){
 	// 2  4  6  8 => 2x2 image 1
 
 	//Crate simple test image
-	std::shared_ptr< std::vector<unsigned short> > testbuffer(new std::vector<unsigned short>( ) );
-	unsigned short testValue =2;
+	std::shared_ptr< std::vector<float> > testbuffer(new std::vector<float>( ) );
+	float testValue =2;
 	for( int iBuffer = 0; iBuffer < 4; iBuffer++ ){
 
-		testbuffer->push_back(testValue);
-		testValue +=2;
+		testbuffer->push_back(5757488574);
+
 
 	}
 	///
 
-	std::shared_ptr<stk::Image<unsigned short> > myImage(new stk::Image<unsigned short>);
+	std::shared_ptr<stk::Image<float> > myImage(new stk::Image<float>);
 	myImage->Initialise( testbuffer, 2, 2 ); //initialise to 2x2 image
 
-	stk::ImageDivision<unsigned short> myDivider;//create divider
-	unsigned short divisor=2;
-	myDivider.DivideImage( myImage, divisor );//perform the division
+	stk::ImageDivision myDivider;//create divider
+	float divisor=5757565;
+	myDivider.DivideImage( myImage, divisor);//perform the division
 
-	for( std::vector<unsigned short>::iterator it = myImage->StartImage();
+	for( std::vector<float>::iterator it = myImage->StartImage();
 			it !=myImage->EndImage(); it++ ){//loop over pixels
-		if(it==myImage->StartImage()) EXPECT_EQ( (*it), 1 );//check elements have correct values
-		if(it==myImage->StartImage()+1) EXPECT_EQ( (*it), 2 );
-		if(it==myImage->StartImage()+2) EXPECT_EQ( (*it), 3 );
-		if(it==myImage->StartImage()+3) EXPECT_EQ( (*it), 4 );
+		if(it==myImage->StartImage()) EXPECT_EQ( (*it), 999 );//check elements have correct values
+		if(it==myImage->StartImage()+1) EXPECT_EQ( (*it),999 );
+		if(it==myImage->StartImage()+2) EXPECT_EQ( (*it), 999);
+		if(it==myImage->StartImage()+3) EXPECT_EQ( (*it), 999 );
 
 	}
 

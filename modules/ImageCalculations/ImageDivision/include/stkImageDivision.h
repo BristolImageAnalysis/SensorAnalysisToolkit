@@ -20,7 +20,7 @@ namespace stk{
  *
  */
 
-template <typename T_Pixeltype>
+//template <typename T_Pixeltype>
 class ImageDivision{
 public:
 	/**
@@ -37,7 +37,8 @@ public:
 	 * @par[in] dividendImage Image containing pixels that will be divided.
 	 * @par[in] divisor Constant that each pixel will be divided by.
 	 */
-	void DivideImage( std::shared_ptr< stk::Image<T_Pixeltype> > dividendImage, const T_Pixeltype &divisor );
+	template< typename T_PixelOutputType>
+	void DivideImage( std::shared_ptr< stk::Image<T_PixelOutputType> > dividendImage, const T_PixelOutputType &divisor );
 
 };
 

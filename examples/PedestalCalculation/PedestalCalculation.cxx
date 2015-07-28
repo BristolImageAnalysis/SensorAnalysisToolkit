@@ -18,7 +18,7 @@
 #include "stkImageStack.h"//hold the files to be loaded
 #include "stkImage.h"//will hold the result
 #include "stkImageSum.h"//used to sum the stack
-#include "stkImageDivision.h"//used to divide throgh to get final result
+#include "stkImageDivision.h"//used to divide through to get final result
 
 int main(int argc, const char** argv){
 
@@ -35,7 +35,7 @@ int main(int argc, const char** argv){
 	//
 	std::stringstream inputs;
 	for(int iArg=1; iArg < argc; iArg++){
-		inputs << argv[iArg] << ' ';//get the argumnets
+		inputs << argv[iArg] << ' ';//get the arguments
 	}
 
 	inputs >> filePath >> fileNameAndFormat >> outFileNameAndPath >> startingframe >> numOfFrames >> rows >> cols;//write the parameters into setup

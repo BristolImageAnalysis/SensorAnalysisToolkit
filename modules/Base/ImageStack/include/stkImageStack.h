@@ -63,6 +63,14 @@ public:
 	 * \return A const reference to the pixel value.
 	 */
 	inline const T_PixelType& GetPixelAt(const int &position){return m_imageStack->at(position);};
+	/*
+	 * Finds the size of the stack as an int number of images.
+	 */
+	inline int SizeOfStack(){return m_numberOfFrames*m_frameSize;};
+	/*
+	 * sets pixel value in stack
+	 */
+	inline void SetPixelAt(const int &position, const T_PixelType &value){ m_imageStack->at(position)=value;};
 
 
 private:

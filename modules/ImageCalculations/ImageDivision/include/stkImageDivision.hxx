@@ -14,18 +14,18 @@
 
 namespace stk{
 
-template <typename T_Pixeltype> ImageDivision<T_Pixeltype>::ImageDivision(){}
+ImageDivision::ImageDivision(){}
 
-template <typename T_Pixeltype> ImageDivision<T_Pixeltype>::~ImageDivision(){}
+ ImageDivision::~ImageDivision(){}
 
-template <typename T_Pixeltype>
-void ImageDivision<T_Pixeltype>::DivideImage( std::shared_ptr< stk::Image<T_Pixeltype> > dividendImage, const T_Pixeltype &divisor ){
+ template<typename T_PixelOutputType>
+void ImageDivision::DivideImage( std::shared_ptr< stk::Image<T_PixelOutputType> > dividendImage, const T_PixelOutputType &divisor ){
 
-	typename std::vector<T_Pixeltype>::iterator itFirstPixel =  dividendImage->StartImage(); //set to start of the image
-	typename std::vector<T_Pixeltype>::iterator itLastPixel =  dividendImage->EndImage(); //set to end of image
+	typename std::vector<T_PixelOutputType>::iterator itFirstPixel =  dividendImage->StartImage(); //set to start of the image
+	typename std::vector<T_PixelOutputType>::iterator itLastPixel =  dividendImage->EndImage(); //set to end of image
 
-	std::transform( itFirstPixel, itLastPixel, itFirstPixel,
-			std::bind2nd(std::divides<T_Pixeltype>(), divisor)  );//use the transform method to calculate the result of the division
+			std::transform( itFirstPixel, itLastPixel, itFirstPixel,
+			std::bind2nd(std::divides<T_PixelOutputType>(), divisor)  );//use the transform method to calculate the result of the division
 
 }
 

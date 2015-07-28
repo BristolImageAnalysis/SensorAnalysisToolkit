@@ -19,7 +19,7 @@ include_directories(${ROOT_INCLUDE_DIRS})
 #Add library
 add_library( stkImageHistogram SHARED ${SOURCE_FILES} ${INCLUDE_FILES} )
 
-target_link_libraries(stkImageHistogram ${TEST_LIB_DIR}/libstkRawIO.so ${TEST_LIB_DIR}/libstkImage.so )
+target_link_libraries(stkImageHistogram ${TEST_LIB_DIR}/libstkRawIO.dylib ${TEST_LIB_DIR}/libstkImage.dylib )
 
 set_target_properties(stkImageHistogram PROPERTIES LINKER_LANGUAGE CXX)
 

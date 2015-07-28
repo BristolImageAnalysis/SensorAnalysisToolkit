@@ -36,7 +36,7 @@ int main(int argc, const char** argv){
 	//
 	std::stringstream inputs;
 	for(int iArg=1; iArg < argc; iArg++){
-		inputs << argv[iArg] << ' ';//get the argumnets
+		inputs << argv[iArg] << ' ';//get the arguments
 	}
 
 	inputs >> filePath >> fileNameAndFormat >> outFileNameAndPath >> startingframe >> numOfFrames >> rows >> cols;//write the parameters into setup
@@ -49,11 +49,11 @@ int main(int argc, const char** argv){
 	myImageStack->Initialise( myIO.ReadImageStack( filePath, fileNameAndFormat, startingframe, numOfFrames, framesize ), numOfFrames, rows, cols );
 
 	//Sum
-	stk::ImageSum<unsigned short> mySummer;
+	stk::ImageSum mySummer;
 	//divide
-	stk::ImageDivision<unsigned short> myDivider;
+	stk::ImageDivision myDivider;
 	//Image to hold result
-	std::shared_ptr< stk::Image<unsigned short> > myResult ( new stk::Image<unsigned short>(4096,4096) );
+	std::shared_ptr< stk::Image<float> > myResult ( new stk::Image<float>(4096,4096) );
 
 
 	std::chrono::steady_clock::time_point t0 = std::chrono::steady_clock::now();//used to find the time it takes for Image to run
@@ -62,7 +62,7 @@ int main(int argc, const char** argv){
 
 	std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();//some timing info
 
-	myDivider.DivideImage(myResult, static_cast<unsigned short>(myImageStack->NumberOfImageInStack()) );
+	myDivider.DivideImage(myResult, static_cast<float>(myImageStack->NumberOfImageInStack()) );
 
 	std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
 
@@ -73,7 +73,7 @@ int main(int argc, const char** argv){
 	std::cout << "Time for Image Division " << time_span_2.count() << " seconds." << std::endl;
 
 	//set up hist
-	stk::ImageHistogram<TH2F, unsigned short> myImageHistogram;
+	stk::ImageHistogram<TH2F, float> myImageHistogram;
 	myImageHistogram.SetTitle("Test");
 
 	myImageHistogram.SetYAxisTitle("Row");

@@ -18,7 +18,7 @@ ImageStack<T_PixelType>::ImageStack() : m_numberOfFrames(0), m_col(0), m_row(0),
 }
 
 template <typename T_PixelType>
-ImageStack<T_PixelType>::~ImageStack(){ m_imageStack.reset(); /*relase the pointer to the vector of data to be deleted when no one is pointing at it*/}
+ImageStack<T_PixelType>::~ImageStack(){ m_imageStack.reset(); /*release the pointer to the vector of data to be deleted when no one is pointing at it*/}
 
 template <typename T_PixelType>
 void ImageStack<T_PixelType>::Initialise(std::shared_ptr< std::vector<T_PixelType> > buffer, const int &numberOfFrames, const int &col, const int &row){

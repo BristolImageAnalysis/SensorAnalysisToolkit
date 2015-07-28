@@ -17,7 +17,7 @@ endif()
 set(PROJECT_RAW_IO_SOURCE $ENV{HOME}/SensorAnalysisToolKit)
 set(COMMON_INCLUDES ${PROJECT_RAW_IO_SOURCE}/modules/Base/ImageStack/include ${PROJECT_RAW_IO_SOURCE}/modules/Base/Image/include ${PROJECT_RAW_IO_SOURCE}/modules/ImageCalculations/ImageSum/include)
 message(STATUS "Common includes ${COMMON_INCLUDES}")
-set(EXT_PROJECTS_DIR $ENV{HOME}/Software)
+set(EXT_PROJECTS_DIR /software)
 
 #-------------------
 # Module source
@@ -37,8 +37,8 @@ enable_testing()
 set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
 set(GTEST_INCLUDE_DIRS ${EXT_PROJECTS_DIR}/gtest-1.7.0/include)
 
-set(GTEST_LIBS_DIR ${EXT_PROJECTS_DIR}/gtest-1.7.0/lib)
-set(STK_LIB_DIR ${PROJECT_RAW_IO_SOURCE}/build/lib)
+set(GTEST_LIBS_DIR ${EXT_PROJECTS_DIR}/gtest-1.7.0)
+set(STK_LIB_DIR $ENV{HOME}/SensorAnalysisToolKit_Eclipse/lib)
 
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
 
@@ -52,7 +52,7 @@ target_link_libraries(${PROJECT_TEST_NAME} ${GTEST_LIBS_DIR}/libgtest.a ${GTEST_
 
 target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
-target_link_libraries(${PROJECT_TEST_NAME} ${STK_LIB_DIR}/libstkImageStack.so ${STK_LIB_DIR}/libstkImage.so ${STK_LIB_DIR}/libstkImageSum.so)
+target_link_libraries(${PROJECT_TEST_NAME} ${STK_LIB_DIR}/libstkImageStack.dylib ${STK_LIB_DIR}/libstkImage.dylib ${STK_LIB_DIR}/libstkImageSum.dylib)
 
 add_test(test1 ${PROJECT_TEST_NAME})
 
