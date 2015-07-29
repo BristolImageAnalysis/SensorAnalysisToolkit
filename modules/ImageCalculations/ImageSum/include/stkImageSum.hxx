@@ -14,11 +14,11 @@
 
 namespace stk{
 
-template <typename T_Pixeldata>
-ImageSum<T_Pixeldata>::ImageSum(){}
 
-template <typename T_Pixeldata>
-ImageSum<T_Pixeldata>::~ImageSum(){}
+ImageSum::ImageSum(){}
+
+
+ImageSum::~ImageSum(){}
 
 //template <typename T_Pixeldata>
 //void ImageSum<T_Pixeldata>::SumImageStack( const std::shared_ptr< stk::ImageStack<T_Pixeldata> > imageStack, std::shared_ptr < stk::Image<T_Pixeldata> > result ){
@@ -33,20 +33,21 @@ ImageSum<T_Pixeldata>::~ImageSum(){}
 //	}
 //}
 
-template <typename T_Pixeldata>
-void ImageSum<T_Pixeldata>::SumImageStack( const std::shared_ptr< stk::ImageStack<T_Pixeldata> > imageStack, std::shared_ptr < stk::Image<T_Pixeldata> > result ){
+template< typename T_PixelInputType, typename T_PixelOutputType>
+void ImageSum::SumImageStack( const std::shared_ptr< stk::ImageStack<T_PixelInputType> > imageStack, std::shared_ptr < stk::Image<T_PixelOutputType> > result ){
 
-	typename std::vector<T_Pixeldata>::iterator itFrameStart;
-	typename std::vector<T_Pixeldata>::iterator itFrameEnd;
-	typename std::vector<T_Pixeldata>::iterator itResult;
+	typename std::vector<T_PixelInputType>::iterator itFrameStart;
+	typename std::vector<T_PixelInputType>::iterator itFrameEnd;
+	typename std::vector<T_PixelOutputType>::iterator itResult;
 
-	for(int iFrames=0; iFrames < imageStack->NumberOfImageInStack(); iFrames++){
+	for(int iFrames=0; iFrames < imageStack->NumberOfImageInStack(); iFrames++)
 
+	{
 		itFrameStart = imageStack->StartOfFrame(iFrames);
 		itFrameEnd = imageStack->EndOfFrame(iFrames);
 		itResult = result->StartImage();
-		std::transform( itFrameStart, itFrameEnd, itResult, itResult, std::plus<T_Pixeldata>() );
-
+		std::transform( itFrameStart, itFrameEnd, itResult, itResult, std::plus<T_PixelOutputType>() );
+		std::cout<<iFrames<<std::endl;
 	}
 }
 

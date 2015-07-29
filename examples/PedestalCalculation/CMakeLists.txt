@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 2.8.8)
 set(PROJECT_NAME_STR PedestalExample)
 project(${PROJECT_NAME_STR})
 
-set(CMAKE_C_COMPILER /cm/shared/languages/GCC-4.7/bin/gcc)
-set(CMAKE_CXX_COMPILER /cm/shared/languages/GCC-4.7/bin/g++)
+#set(CMAKE_C_COMPILER /cm/shared/languages/GCC-4.7/bin/gcc)
+#set(CMAKE_CXX_COMPILER /cm/shared/languages/GCC-4.7/bin/g++)
 
 find_package(Threads REQUIRED)
 
@@ -20,7 +20,7 @@ endif()
 set(PROJECT_RAW_IO_SOURCE $ENV{HOME}/SensorAnalysisToolKit)
 set(COMMON_INCLUDES ${PROJECT_RAW_IO_SOURCE}/modules/IO/RawIOImageStack/include ${PROJECT_RAW_IO_SOURCE}/modules/IO/RawIO/include ${PROJECT_RAW_IO_SOURCE}/modules/Base/ImageStack/include ${PROJECT_RAW_IO_SOURCE}/modules/Base/Image/include ${PROJECT_RAW_IO_SOURCE}/modules/ImageCalculations/ImageSum/include ${PROJECT_RAW_IO_SOURCE}/modules/ImageCalculations/ImageDivision/include)
 
-set(STK_LIB_DIR ${PROJECT_RAW_IO_SOURCE}/build/lib)
+set(STK_LIB_DIR $ENV{HOME}/SensorAnalysisToolkit_Eclipse/lib)
 
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
 
@@ -30,7 +30,7 @@ add_executable(${PROJECT_NAME_STR} ${PROJECT_SOURCE_DIR}/PedestalCalculation.cxx
 
 target_link_libraries(${PROJECT_NAME_STR} ${CMAKE_THREAD_LIBS_INIT})
 
-target_link_libraries(${PROJECT_NAME_STR} ${STK_LIB_DIR}/libstkRawImageStackIO.so ${STK_LIB_DIR}/libstkRawIO.so ${STK_LIB_DIR}/libstkImageStack.so ${STK_LIB_DIR}/libstkImage.so ${STK_LIB_DIR}/libstkImageSum.so ${STK_LIB_DIR}/libstkImageDivision.so  )
+target_link_libraries(${PROJECT_NAME_STR} ${STK_LIB_DIR}/libstkRawImageStackIO.dylib ${STK_LIB_DIR}/libstkRawIO.dylib ${STK_LIB_DIR}/libstkImageStack.dylib ${STK_LIB_DIR}/libstkImage.dylib ${STK_LIB_DIR}/libstkImageSum.dylib ${STK_LIB_DIR}/libstkImageDivision.dylib  )
 
 
 

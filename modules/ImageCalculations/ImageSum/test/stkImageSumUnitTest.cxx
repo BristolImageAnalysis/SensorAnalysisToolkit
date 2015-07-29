@@ -36,7 +36,7 @@ TEST( ImageSum, CheckAdditionOfArray ){
 	unsigned short testValue =1;
 	for( int iBuffer = 0; iBuffer < 16; iBuffer++ ){
 
-		testbuffer->push_back(testValue);
+		testbuffer->push_back(65534);
 		testValue++;
 
 	}
@@ -45,16 +45,16 @@ TEST( ImageSum, CheckAdditionOfArray ){
 	std::shared_ptr<stk::ImageStack<unsigned short> > myImageStack(new stk::ImageStack<unsigned short>);
 	myImageStack->Initialise( testbuffer, 4, 2, 2 ); //initialise to 4 images 2x2
 
-	std::shared_ptr<stk::Image<unsigned short> > myImage( new stk::Image<unsigned short>(2,2) );//non-default to create initialised buffer
+	std::shared_ptr<stk::Image<float> > myImage( new stk::Image<float>(2,2) );//non-default to create initialised buffer
 
-	stk::ImageSum<unsigned short> mySummer;
+	stk::ImageSum mySummer;
 	mySummer.SumImageStack( myImageStack, myImage );//sum using the STL iterator method
 
 	for( int iBuffer = 0; iBuffer < 4; iBuffer++ ){
-		if(iBuffer==0) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 28 ); //check each element
-		if(iBuffer==1) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 32 ); //
-		if(iBuffer==2) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 36 ); //
-		if(iBuffer==3) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 40 ); //
+		if(iBuffer==0) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 262136 ); //check each element
+		if(iBuffer==1) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 262136 ); //
+		if(iBuffer==2) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 262136 ); //
+		if(iBuffer==3) EXPECT_EQ ( myImage->GetPixelAt( iBuffer ), 262136 ); //
 	}
 
 }

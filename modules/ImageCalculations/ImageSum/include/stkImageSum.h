@@ -10,6 +10,7 @@
 
 #include "stkImage.h"
 #include "stkImageStack.h"
+#include "tbb/tbb.h"
 /**
  * \class ImageSum
  * \brief Class to take a stack of images sum them and write the result to a image.
@@ -19,7 +20,7 @@
  */
 namespace stk{
 
-template <typename T_Pixeldata>
+//template <typename T_Pixeldata>
 class ImageSum{
 public:
 	/**
@@ -37,8 +38,8 @@ public:
 	 * @par[in] imageStack Shared pointer to the image stack to be summed
 	 * @par[in] result Shared pointer to the image where the sum is to written
 	 */
-
-	void SumImageStack( const std::shared_ptr< stk::ImageStack<T_Pixeldata> > imageStack, std::shared_ptr < stk::Image<T_Pixeldata> > result );
+	template< typename T_PixelInputType, typename T_PixelOutputType>
+	void SumImageStack( const std::shared_ptr< stk::ImageStack<T_PixelInputType> > imageStack, std::shared_ptr < stk::Image<T_PixelOutputType> > result );
 };
 
 }
