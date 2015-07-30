@@ -76,7 +76,7 @@ int main(int argc, const char** argv){
 	myImageStack->Initialise( myIO.ReadImageStack( filePath, fileNameAndFormat, startingframe, numOfFrames, framesize ), numOfFrames, rows, cols );
 
 
-
+	std::cout<<"Images loaded."<<std::endl;
 
 
 
@@ -145,11 +145,12 @@ int main(int argc, const char** argv){
 		mySummer.SumImageStack( myPedImageStack, myPedestal );
 		myDivider.DivideImage(myPedestal, static_cast<float>(myPedImageStack->NumberOfImageInStack()) );
 
-
+		std::cout<<"Pedestal Calculated."<<std::endl;
 		//Calculating the number of dark frames in front of the data.
 		float pedAvg;
 		float darkFrames=0;
-		while(darkFrames==0){
+		float darkFramesAfter=0;
+
 		for (int iElements = 0; iElements<framesize; iElements++)
 		{
 
@@ -158,46 +159,114 @@ int main(int argc, const char** argv){
 		pedAvg=pedAvg/framesize;
 
 
-		for(int iFrames=0; iFrames<myImageStack->NumberOfImageInStack(); iFrames++)
+		float pedVar;
+		for (int iElements=0; iElements<framesize; iElements++)
 		{
-			float tempPix;
+			pedVar+= (myPedestal->GetPixelAt(iElements)-pedAvg)*(myPedestal->GetPixelAt(iElements)-pedAvg);
+		}
+		pedVar=std::sqrt(pedVar/framesize);
+
+			int iFrames=0;
+			do {
+			float tempPix=0;
 			for(int iElements=0; iElements<framesize;iElements++)
 			{
-
-				tempPix+=myImageStack->GetPixelAt(iElements);
+				tempPix+=myImageStack->GetPixelAt(iFrames*framesize+iElements);
 			}
 			tempPix=tempPix/framesize;
-			if	(tempPix>pedAvg)
+
+			if	(tempPix>(pedAvg+200))
 				{
 					darkFrames=iFrames;
 				}
-		}
-		}
+			iFrames++;
+
+			}while(darkFrames==0&&iFrames<myImageStack->NumberOfImageInStack());
+
+
+//			float rawAvg;
+//			for (int iElements = 0; iElements<framesize; iElements++)
+//					{
+//
+//						rawAvg += myImageStack->GetPixelAt((2+iFrames)*framesize+iElements);
+//					}
+//			rawAvg=rawAvg/framesize;
+
+			//Calculating the number of dark frames after the data.
+			iFrames=darkFrames;
+			do {
+				float tempPix=0;
+				for(int iElements=0; iElements<framesize;iElements++)
+					{
+						tempPix+=myImageStack->GetPixelAt(iFrames*framesize+iElements);
+					}
+						tempPix=tempPix/framesize;
+
+					if	(tempPix<(pedAvg+200))
+						{
+							darkFramesAfter=iFrames;
+						}
+					iFrames++;
+
+				}while(darkFramesAfter==0&&iFrames<myImageStack->NumberOfImageInStack());
+		std::cout<<"Dark frames excluded."<<std::endl;
 
 
 		//Variance calculation
 		myVarianceCalc.VarianceImageStack(myPedImageStack, myPedestal, myVarianceImage);
 
+
+		float varAvg, varVar;
+		for (int iElements = 0; iElements<framesize; iElements++)
+				{
+
+					varAvg += myVarianceImage->GetPixelAt(iElements);
+				}
+				varAvg=varAvg/framesize;
+
+
+
+				for (int iElements=0; iElements<framesize; iElements++)
+				{
+					varVar+= (myVarianceImage->GetPixelAt(iElements)-varAvg)*(myVarianceImage->GetPixelAt(iElements)-varAvg);
+				}
+				varVar=std::sqrt(varVar/framesize);
+
+
+
+
+
+
+		std::cout<<"Variance calculated."<<std::endl;
+
+
 		//Remove pedestal from raw stack, sum stack into image.
-		myMinus.MinusImage(myImageStack, myPedestal, myResult);
-		myDivider.DivideImage(myResult, static_cast<float>(myImageStack->NumberOfImageInStack()) );
+		myMinus.MinusImage(myImageStack, myPedestal, myResult, darkFrames, darkFramesAfter);
+		//myDivider.DivideImage(myResult, static_cast<float>(darkFramesAfter-darkFrames) );
+
+
+		std::cout<<"Images integrated."<<std::endl;
+
 
 		//Flat field correction
 		myField.CorrectImage(mylightStack, myPedestal, myResult, myGain);
 
+
 		//Mask generation
-		myMask.MaskImage(myResult, myVarianceImage, myMaskImage , myPedestal,myGain, 400, 10, 3200, 500);
+		myMask.MaskImage(myResult, myVarianceImage, myMaskImage , myPedestal,myGain, varAvg+3*varVar, varAvg-2*varVar, pedAvg+2*pedVar, pedAvg-2*pedVar);
 
 		//Averaging the bad pixels
 		myAverage.BadPixelAverage(myResult, myMaskImage);
 
+		std::cout<<"Bad pixels removed."<<std::endl;
 		//Image resizing
 		mySize.ResizeImage(myResult , myResultResize);
 
-
+		stk::IO<float> imageIO;
+		imageIO.WriteImage( myResult, outFileNameAndPath );
 
 		stk::ImageHistogram<TH2F, float> myImageHistogram;
-		myImageHistogram.SetTitle(outFileNameAndPath);
+		myImageHistogram.SetTitle(fileNameAndFormat);
 		myImageHistogram.SetYAxisTitle("Row");
 		myImageHistogram.SetYAxisLog(false);
 		myImageHistogram.SetNumberOfYBins(1024);
@@ -209,7 +278,7 @@ int main(int argc, const char** argv){
 		myImageHistogram.SetGridY(false);
 		myImageHistogram.SetGridX(false);
 
-		myImageHistogram.SetStatBoxOptions(111111);
+		myImageHistogram.SetStatBoxOptions(0);
 		myImageHistogram.SetOutputFileNameAndPath(outFileNameAndPath);
 		myImageHistogram.SetOutputFileType( stk::FileType::PNG );
 

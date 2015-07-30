@@ -57,7 +57,7 @@ public:
 		 * @par[in] outputImage The output image.
 		 */
 	template<typename T_PixelInputType ,typename T_PixelOutputType>
-	void MinusImage(const std::shared_ptr <stk::ImageStack<T_PixelInputType> > myImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > subtractImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > outputImage);
+	void MinusImage(const std::shared_ptr <stk::ImageStack<T_PixelInputType> > myImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > subtractImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > outputImage, int darkFrames, int darkFramesAfter);
 };
 
 

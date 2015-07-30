@@ -34,7 +34,7 @@ void ImageFlatFieldCorrection::CorrectImage(std::shared_ptr<stk::ImageStack<T_Pi
 	stk::ImageDivision divider;
 	T_PixelOutputType num = lightStack->NumberOfImageInStack();
 	summer.SumImageStack(lightStack, lightImage);
-	std::cout<<num<<std::endl;
+
 	divider.DivideImage(lightImage, static_cast<float>(lightStack->NumberOfImageInStack()) );
 
 	/*s
@@ -53,10 +53,9 @@ void ImageFlatFieldCorrection::CorrectImage(std::shared_ptr<stk::ImageStack<T_Pi
 
 	}
 
-	std::cout<<lightImage->NumberOfPixels()<<std::endl;
-	std::cout<<tempPixel<<std::endl;
+
 	T_PixelOutputType m = tempPixel/(lightImage->NumberOfPixels());
-	std::cout<<m<<std::endl;
+
 	/*
 	 * Calculating Gain
 	 *
