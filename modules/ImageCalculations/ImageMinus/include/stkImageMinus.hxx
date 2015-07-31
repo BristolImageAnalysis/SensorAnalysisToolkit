@@ -59,9 +59,9 @@ void ImageMinus::MinusImage(const std::shared_ptr <stk::Image<T_PixelOutputType>
 
 
 template<typename T_PixelInputType ,typename T_PixelOutputType>
-	void ImageMinus::MinusImage(const std::shared_ptr <stk::ImageStack<T_PixelInputType> > imageStack, const std::shared_ptr< stk::Image<T_PixelOutputType> > subtractImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > outputImage){
+	void ImageMinus::MinusImage(const std::shared_ptr <stk::ImageStack<T_PixelInputType> > imageStack, const std::shared_ptr< stk::Image<T_PixelOutputType> > subtractImage, const std::shared_ptr< stk::Image<T_PixelOutputType> > outputImage, int darkFrames, int darkFramesAfter){
 
-	tbb::parallel_for(0, imageStack->NumberOfImageInStack(), [&](int iFrames)
+	tbb::parallel_for(darkFrames, darkFramesAfter, [&](int iFrames)
 			{
 
 					for(int iElements=0; iElements<subtractImage->NumberOfPixels();iElements++){
