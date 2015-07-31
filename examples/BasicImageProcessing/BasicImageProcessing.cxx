@@ -154,7 +154,7 @@ int main(int argc, const char** argv){
 	myDivider.DivideImage(myPedestal, static_cast<float>(myPedImageStack->NumberOfImageInStack()) );
 
 	std::cout<<"Pedestal Calculated."<<std::endl;
-	float pedAvg;
+	float pedAvg(0);
 	for (int iElements = 0; iElements<framesize; iElements++)
 	{
 
@@ -163,7 +163,7 @@ int main(int argc, const char** argv){
 	pedAvg=pedAvg/framesize;
 
 
-	float pedVar;
+	float pedVar(0);
 	for (int iElements=0; iElements<framesize; iElements++)
 	{
 		pedVar+= (myPedestal->GetPixelAt(iElements)-pedAvg)*(myPedestal->GetPixelAt(iElements)-pedAvg);
@@ -185,17 +185,17 @@ int main(int argc, const char** argv){
 	stk::IOImageStack<unsigned short> myIO;
 
 
-
+	int darkFlag(0);
 	for ( int iter = 0; iter<NumOfImageStacks;iter++){
-		std::cout<<iter<<" "<<(iter)*100+(100*dec)<<std::endl;
+
 		if (iter==loops)
 		{
 
-			//std::cout<<iter*100<<" "<<(iter)*100+(100*dec)<<std::endl;
+
 
 			myImageStack->Initialise( myIO.ReadImageStack( filePath, fileNameAndFormat, iter*100, (100*dec), framesize ), 100*dec	, rows, cols );
 			//Calculating the number of dark frames in front of the data.
-			std::cout<<"loadedsd"<<std::endl;
+
 			float darkFrames=0;
 			float darkFramesAfter=0;
 
@@ -212,11 +212,11 @@ int main(int argc, const char** argv){
 
 				if	(tempPix>(pedAvg+200))
 				{
-					darkFrames=iFrames;
-				}
-				iFrames++;
 
-			}while(darkFrames==0&&iFrames<myImageStack->NumberOfImageInStack());
+						darkFrames=iFrames;
+				}
+
+			}while(darkFrames==0&&iFrames<myImageStack->NumberOfImageInStack()&&darkFlag!=1);
 
 
 
@@ -233,12 +233,17 @@ int main(int argc, const char** argv){
 				if	(tempPix<(pedAvg+200))
 				{
 					darkFramesAfter=iFrames;
+
 				}
+
 				iFrames++;
 
 			}while(darkFramesAfter==0&&iFrames<myImageStack->NumberOfImageInStack());
+			if(darkFramesAfter==0){
+							darkFramesAfter=dec*100;
+						}
 			std::cout<<"Dark frames excluded."<<std::endl;
-			//std::cout<<darkFrames<<" "<<darkFramesAfter<<std::endl;
+			std::cout<<darkFrames<<" "<<darkFramesAfter<<std::endl;
 			//Remove pedestal from raw stack, sum stack into image.
 			//
 			myMinus.MinusImage(myImageStack, myPedestal, myResult, darkFrames, darkFramesAfter);
@@ -248,9 +253,11 @@ int main(int argc, const char** argv){
 		}
 		else
 		{
+
+
 			//stk::IOImageStack<unsigned short> myIO;
 			//std::shared_ptr< stk::ImageStack<unsigned short> > myImageStack( new stk::ImageStack<unsigned short> );
-			myImageStack->Initialise( myIO.ReadImageStack( filePath, fileNameAndFormat, iter*100, (iter+1)*(100), framesize ), 100, rows, cols );
+			myImageStack->Initialise( myIO.ReadImageStack( filePath, fileNameAndFormat, iter*100, (100), framesize ), 100, rows, cols );
 			//Calculating the number of dark frames in front of the data.
 
 			float darkFrames=0;
@@ -268,11 +275,13 @@ int main(int argc, const char** argv){
 
 				if	(tempPix>(pedAvg+200))
 				{
+
 					darkFrames=iFrames;
+					darkFlag=1;
 				}
 				iFrames++;
 
-			}while(darkFrames==0&&iFrames<myImageStack->NumberOfImageInStack());
+			}while(darkFrames==0&&iFrames<myImageStack->NumberOfImageInStack()&&darkFlag!=1);
 
 
 
@@ -290,11 +299,16 @@ int main(int argc, const char** argv){
 				{
 					darkFramesAfter=iFrames;
 				}
+
 				iFrames++;
 
+
 			}while(darkFramesAfter==0&&iFrames<myImageStack->NumberOfImageInStack());
+			if(darkFramesAfter==0){
+				darkFramesAfter=100;
+			}
 			//std::cout<<darkFrames<<" "<<darkFramesAfter<<std::endl;
-			std::cout<<"Dark frames excluded."<<std::endl;
+			//std::cout<<"Dark frames excluded."<<std::endl;
 			//Remove pedestal from raw stack, sum stack into image.
 			myMinus.MinusImage(myImageStack, myPedestal, myResult, darkFrames, darkFramesAfter);
 			//myDivider.DivideImage(myResult, static_cast<float>(darkFramesAfter-darkFrames) );
@@ -302,7 +316,12 @@ int main(int argc, const char** argv){
 
 	}
 
-
+//float temp=0;
+//	for(int iElements = 0; iElements<myResult->NumberOfPixels();iElements++){
+//		temp+= myResult->GetPixelAt(iElements);
+//		//std::cout<<myResult->GetPixelAt(iElements)<<std::endl;
+//	}
+////std::cout<<temp<<std::endl;
 	//Variance calculation
 
 	std::cout<<"Ped of Pixel 0: "<<myPedestal->GetPixelAt(0)<<std::endl;
