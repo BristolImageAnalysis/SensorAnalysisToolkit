@@ -5,6 +5,8 @@
  *      Author: phrfp
  */
 
+
+
 #ifndef __stkImageHistogram_h
 #define __stkImageHistogram_h
 
