@@ -47,7 +47,7 @@ void ImageSum::SumImageStack( const std::shared_ptr< stk::ImageStack<T_PixelInpu
 		itFrameEnd = imageStack->EndOfFrame(iFrames);
 		itResult = result->StartImage();
 		std::transform( itFrameStart, itFrameEnd, itResult, itResult, std::plus<T_PixelOutputType>() );
-		std::cout<<iFrames<<std::endl;
+		//std::cout<<iFrames<<std::endl;
 	}
 }
 
