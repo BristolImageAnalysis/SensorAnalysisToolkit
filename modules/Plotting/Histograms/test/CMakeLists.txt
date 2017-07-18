@@ -2,8 +2,8 @@
 
 cmake_minimum_required(VERSION 2.8.8)
 
-set(ROOT_DIR /panfs/panasas01/phys/phrfp/Software/root-6.0.4/cmake)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /panfs/panasas01/phys/phrfp/Software/root-6.0.4/cmake/modules)
+set(ROOT_DIR $ENV{ROOTSYS}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} $ENV{ROOTSYS}/cmake/modules)
 
 set(PROJECT_NAME_STR ImageHist)
 project(${PROJECT_NAME_STR})
@@ -19,7 +19,7 @@ endif()
 #-------------------
 # set common include folder for module
 #-------------------
-set(PROJECT_RAW_IO_SOURCE $ENV{HOME}/SensorAnalysisToolKit)
+set(PROJECT_RAW_IO_SOURCE ${PROJECT_BASE_DIR})
 set(COMMON_INCLUDES ${PROJECT_RAW_IO_SOURCE}/modules/IO/RawIO/include ${PROJECT_RAW_IO_SOURCE}/modules/Base/Image/include ${PROJECT_RAW_IO_SOURCE}/modules/Plotting/Histograms/include )
 message(STATUS "Common includes ${COMMON_INCLUDES}")
 set(EXT_PROJECTS_DIR $ENV{HOME}/Software)
@@ -53,4 +53,3 @@ target_link_libraries( ${PROJECT_TEST_NAME} ${ROOT_LIBRARIES})
 target_link_libraries(${PROJECT_TEST_NAME} ${TEST_LIB_DIR}/libstkRawIO.so ${TEST_LIB_DIR}/libstkImage.so ${TEST_LIB_DIR}/libstkImageHistogram.so )
 
 add_test(test1 ${PROJECT_TEST_NAME})
-

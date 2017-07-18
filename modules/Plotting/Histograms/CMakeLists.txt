@@ -8,19 +8,17 @@ set(SOURCE_FILES include/stkImageHistogram.hxx)
 set(INCLUDE_FILES include/stkImageHistogram.h )
 message( STATUS "Source files: ${SOURCE_FILES}" )
 
-set(PROJECT_RAW_IO_SOURCE $ENV{HOME}/SensorAnalysisToolKit)
+set(PROJECT_RAW_IO_SOURCE EXT_PROJECTS_DIR)
 set(TEST_LIB_DIR ${PROJECT_RAW_IO_SOURCE}/build/lib/)
 
-set(EXT_PROJECTS_DIR $ENV{HOME}/Software)
-set(ROOT_INCLUDE_DIRS ${EXT_PROJECTS_DIR}/root-6.0.4/include)
-set(ROOT_LIB_DIR ${EXT_PROJECTS_DIR}/root-6.0.4/lib )
+# set(EXT_PROJECTS_DIR $ENV{HOME}/Software)
+set(ROOT_INCLUDE_DIRS $ENV{ROOTSYS}/include)
+set(ROOT_LIB_DIR $ENV{ROOTSYS}/lib )
 include_directories(${ROOT_INCLUDE_DIRS})
 
 #Add library
 add_library( stkImageHistogram SHARED ${SOURCE_FILES} ${INCLUDE_FILES} )
 
-target_link_libraries(stkImageHistogram ${TEST_LIB_DIR}/libstkRawIO.dylib ${TEST_LIB_DIR}/libstkImage.dylib )
+target_link_libraries(stkImageHistogram stkRawIO stkImage )
 
 set_target_properties(stkImageHistogram PROPERTIES LINKER_LANGUAGE CXX)
-
-
