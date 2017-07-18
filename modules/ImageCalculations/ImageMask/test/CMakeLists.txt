@@ -52,7 +52,6 @@ target_link_libraries(${PROJECT_TEST_NAME} ${GTEST_LIBS_DIR}/libgtest.a ${GTEST_
 
 target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
-target_link_libraries(${PROJECT_TEST_NAME} ${STK_LIB_DIR}/libstkImageStack.dylib ${STK_LIB_DIR}/libstkImage.dylib ${STK_LIB_DIR}/libstkImageMask.dylib)
+target_link_libraries(${PROJECT_TEST_NAME} stkImageStack stkImage stkImageMask)
 
 add_test(test1 ${PROJECT_TEST_NAME})
-
